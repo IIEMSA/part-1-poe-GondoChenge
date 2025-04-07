@@ -1,0 +1,53 @@
+﻿@model IEnumerable<VenueBookingSystemCode.Models.Venues>
+
+@{
+    ViewData["Title"] = "Venue Information";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.venue_name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.location_of_venue)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.capacity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.image_url)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.venue_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.location_of_venue)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.capacity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.image_url)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.venue_id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.venue_id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.venue_id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
