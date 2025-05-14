@@ -1,0 +1,53 @@
+﻿@model VenueBookingSystemCode.Models.Venues
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Venues</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+
+        <!-- // This is step 4a(1) Add enctype= "multipart/form-data"-->
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="venue_name" class="control-label"></label>
+                <input asp-for="venue_name" class="form-control" />
+                <span asp-validation-for="venue_name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="location_of_venue" class="control-label"></label>
+                <input asp-for="location_of_venue" class="form-control" />
+                <span asp-validation-for="location_of_venue" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="capacity" class="control-label"></label>
+                <input asp-for="capacity" class="form-control" />
+                <span asp-validation-for="capacity" class="text-danger"></span>
+            </div>
+
+           <!-- // Step 4A (2): Replace the ImageUrl input with ImageFile upload-->
+            <div class="form-group">
+                <label asp-for="ImageFile" class="control-label"></label>
+                <input asp-for="ImageFile" class="form-control" type="file" />
+                <span asp-validation-for="ImageFile" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,86 @@
+﻿@model IEnumerable<VenueBookingSystemCode.Models.Venues>
+
+@{
+    ViewData["Title"] = "Venue Information";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.venue_name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.location_of_venue)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.capacity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.image_url)
+            </th>
+
+
+            <!-- Step 7: Changed header from ImageURL to venue Image-->
+
+            </th>Venue Image</th>
+
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.venue_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.location_of_venue)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.capacity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.image_url)
+            </td>
+
+
+               <!-- This is step 7: Display the actual image instead of showing the URL-->
+            <td>
+                    @if (!string.IsNullOrEmpty(item.image_url))
+                {
+                        <img src="@item.image_url" alt="Venue Image" width="100" height="100" style="object-fit:cover; border-radius:8px;" />
+                }
+                else
+                {
+                    <span>No Image</span>
+                }
+                </td>
+                <td>
+                    @if (!string.IsNullOrEmpty(item.image_url))
+                    {
+                        <img src="@item.image_url" alt="Venue Image" width="100" height="100" style="object-fit:cover; border-radius:8px;" />
+                    }
+                    else
+                    {
+                        <span>No Image</span>
+                    }
+                </td>
+               
+               
+               
+               <td>
+                <a asp-action="Edit" asp-route-id="@item.venue_id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.venue_id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.venue_id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

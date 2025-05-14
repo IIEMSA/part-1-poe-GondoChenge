@@ -1,0 +1,85 @@
+﻿@model IEnumerable<VenueBookingSystemCode.Models.Bookings>
+
+@{
+    ViewData["Title"] = "Bookings Page";
+}
+
+<h1>Index</h1>
+
+<!-- Add search function -->
+<form asp-action="Index" method="get" class="form-inline mb-3">
+    <div class="form-group mr-2">
+        <input type="number" name="searchInteger" class="form-control" placeholder="Enter an integer..." />
+    </div>
+    <button type="submit" class="btn btn-primary mt-2">Search</button>
+</form>
+
+<!--Show Success Messages (TempData) -->
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+
+    </div>
+
+}
+
+<!--Show error Messages (ModelState errors) -->
+@if (!ViewData.ModelState.IsValid)
+{
+    foreach( var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+    {
+        <div class="alert alert-danger">
+
+            @error.ErrorMessage
+        </div>
+        
+
+    }
+}
+
+
+
+
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+
+
+            <th>
+                Event ID
+            </th>
+            <th>
+                Venue ID
+            </th>
+            <th>
+                Booking Date
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var booking in Model) {
+        <tr>
+            <td>
+                @booking.event_id)
+            </td>
+            <td>
+                    @booking.venue_id
+            </td>
+            <td>
+                @booking.booking_date.ToString("yyyy-MM-dd")
+            </td>
+            <td>
+                    <a asp-action="Edit" asp-route-id="@booking.booking_id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@booking.booking_id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@booking.booking_id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
